@@ -9,12 +9,65 @@ main {
   background: var(--bg);
 }
 
-.menu-categories-wrapper {
+.menu-sections-wrapper {
   width: 100%;
 }
 
-/* Global scroll behavior for better UX */
-body {
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
+.menu-group {
+  position: relative;
+  overflow: hidden;
+}
+
+.group-header {
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Highly visible outlined text with a premium "smooth" look */
+.outlined-text {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 15vw, 12rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  line-height: 1;
+  text-align: center;
+  
+  /* The "Outlined" visible style */
+  color: transparent;
+  -webkit-text-stroke: 2px var(--primary); /* Sharper outline */
+  opacity: 0.5; /* Increased prominence */
+  
+  /* Smooth integration: adding a subtle background glow */
+  filter: drop-shadow(0 0 15px var(--primary-glow));
+  
+  /* Layering logic */
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+  transition: all 0.6s ease;
+}
+
+/* Subtle accent behind the text */
+.group-header::before {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: var(--primary-glow);
+  filter: blur(100px);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+@media (max-width: 768px) {
+  .group-header {
+    height: 25vh;
+  }
 }

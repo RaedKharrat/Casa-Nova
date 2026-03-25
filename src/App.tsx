@@ -13,9 +13,18 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <div className="menu-categories-wrapper">
-          {menuData.flatMap(section => section.categories).map((category) => (
-            <MenuSection key={category.id} category={category} />
+        <div className="menu-sections-wrapper">
+          {menuData.map((section) => (
+            <div key={section.id} className="menu-group">
+              <header className="group-header">
+                <h2 className="outlined-text">{section.title}</h2>
+              </header>
+              <div className="categories-grid">
+                {section.categories.map((category) => (
+                  <MenuSection key={category.id} category={category} />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </main>

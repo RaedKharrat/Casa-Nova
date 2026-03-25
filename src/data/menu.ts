@@ -1,12 +1,12 @@
-import { 
-  Coffee, 
-  IceCream, 
-  CupSoda, 
-  Wine, 
-  Leaf, 
-  Flame, 
-  GlassWater, 
-  ChefHat, 
+import {
+  Coffee,
+  IceCream,
+  CupSoda,
+  Wine,
+  Leaf,
+  Flame,
+  GlassWater,
+  ChefHat,
   Cookie,
   Beer,
   Zap
@@ -55,16 +55,16 @@ const createProducts = (list: string[], categoryLabel: string, basePrice: number
     const name = item.trim();
     const formattedName = name.replace(/\b\w/g, c => c.toUpperCase());
     const price = (basePrice + (index % 3)).toFixed(2) + ' TND';
-    
+
     let image = images.hot;
-    if(categoryLabel.toLowerCase().includes('iced')) image = images.iced;
-    if(categoryLabel.toLowerCase().includes('frappe')) image = images.frappe;
-    if(categoryLabel.toLowerCase().includes('milkshake')) image = images.milkshake;
-    if(categoryLabel.toLowerCase().includes('juice')) image = images.juice;
-    if(categoryLabel.toLowerCase().includes('dessert')) image = images.dessert;
-    if(categoryLabel.toLowerCase().includes('cocktail')) image = images.cocktail;
-    if(categoryLabel.toLowerCase().includes('smoothie')) image = images.smoothie;
-    if(categoryLabel.toLowerCase().includes('mojito')) image = images.mojito;
+    if (categoryLabel.toLowerCase().includes('iced')) image = images.iced;
+    if (categoryLabel.toLowerCase().includes('frappe')) image = images.frappe;
+    if (categoryLabel.toLowerCase().includes('milkshake')) image = images.milkshake;
+    if (categoryLabel.toLowerCase().includes('juice')) image = images.juice;
+    if (categoryLabel.toLowerCase().includes('dessert')) image = images.dessert;
+    if (categoryLabel.toLowerCase().includes('cocktail')) image = images.cocktail;
+    if (categoryLabel.toLowerCase().includes('smoothie')) image = images.smoothie;
+    if (categoryLabel.toLowerCase().includes('mojito')) image = images.mojito;
 
     return {
       id: generateId(name),
@@ -156,7 +156,7 @@ export const menuData: MenuSection[] = [
   },
   {
     id: 'hot-drinks',
-    title: 'Hot & Others',
+    title: 'Hot Drinks',
     categories: [
       {
         id: 'coffee',

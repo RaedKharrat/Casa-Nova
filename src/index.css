@@ -1,0 +1,94 @@
+:root {
+  --bg: #0c0b0a;
+  --bg-gradient: radial-gradient(circle at 50% 0%, #1a1714 0%, #0c0b0a 100%);
+  --surface: rgba(25, 22, 18, 0.4);
+  --surface-hover: rgba(35, 30, 25, 0.6);
+  --border: rgba(255, 255, 255, 0.08); /* sharper border */
+  --text: #ffffff;
+  --text-muted: #a09d9a;
+  --primary: #d4a373; /* premium gold-brown */
+  --primary-glow: rgba(212, 163, 115, 0.3);
+  --accent: #E8D5C4; /* soft cream */
+  
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: 'Playfair Display', "Times New Roman", Times, serif;
+  
+  --shadow: 0 15px 45px 0 rgba(0, 0, 0, 0.5);
+  --glass-blur: blur(15px);
+  --transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Custom Trendy Selection */
+::selection {
+  background: var(--primary);
+  color: #000;
+}
+
+/* Enhanced Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0c0b0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a1714;
+  border-radius: 5px;
+  border: 2px solid #0c0b0a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Modern utility animations */
+@keyframes fadeInSlide {
+  from { opacity: 0; transform: translateY(20px); filter: blur(5px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+.animate-on-scroll {
+  animation: fadeInSlide 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* Utility to ensure text fits on small devices */
+.nowrap {
+  white-space: nowrap;
+}

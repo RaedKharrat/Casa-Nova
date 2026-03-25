@@ -1,0 +1,103 @@
+.hero {
+  position: relative;
+  height: 100dvh; /* dynamic viewport height for mobile */
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1920&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom, 
+    rgba(12, 11, 10, 0.4) 0%, 
+    rgba(12, 11, 10, 0.6) 40%,
+    rgba(12, 11, 10, 0.95) 100%
+  );
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0 2rem;
+}
+
+/* Trendy Typography Layering */
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 12vw, 10rem);
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: inline-block;
+  background: linear-gradient(180deg, #fff, var(--primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
+}
+
+.hero-subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 3vw, 1.8rem);
+  font-weight: 300;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  margin: 0;
+  opacity: 0.9;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0.8rem 1.5rem;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.hero-scroll-btn {
+  background: var(--primary);
+  border: 1px solid var(--border);
+  color: #000;
+  cursor: pointer;
+  animation: bounce 2s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  transition: all 0.3s ease;
+  margin-top: 5rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.hero-scroll-btn:hover {
+  transform: scale(1.1);
+  background: var(--accent);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(20px); }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    background-attachment: scroll; /* better performance on mobile */
+  }
+}

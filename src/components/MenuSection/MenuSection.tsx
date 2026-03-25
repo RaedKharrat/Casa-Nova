@@ -8,16 +8,30 @@ interface MenuSectionProps {
 
 export const MenuSection = ({ category }: MenuSectionProps) => {
   return (
-    <section id={category.id} className="menu-section">
+    <section 
+      id={category.id} 
+      className="menu-section"
+      style={{ backgroundColor: category.themeColor }}
+    >
       <div className="menu-container">
         <div className="section-header">
-          <h2 className="section-title">{category.name}</h2>
-          <div className="section-divider"></div>
+          <div className="category-title-wrapper">
+             <h2 className="section-title">{category.name}</h2>
+             <span className="items-count">{category.items.length} Items</span>
+          </div>
+          <p className="swipe-hint">Swipe to explore →</p>
         </div>
-        <div className="products-grid">
-          {category.items.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+        
+        <div className="products-horizontal-scroll">
+          <div className="scroll-inner">
+            {category.items.map((product) => (
+              <div key={product.id} className="scroll-item">
+                <ProductCard product={product} />
+              </div>
+            ))}
+            {/* Added a spacer at the end for better scroll ending */}
+            <div className="scroll-spacer"></div>
+          </div>
         </div>
       </div>
     </section>

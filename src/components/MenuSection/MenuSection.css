@@ -1,9 +1,32 @@
+/* ===== Swipe-Up Entrance Animation ===== */
 .menu-section {
   padding: 8rem 0;
   position: relative;
-  transition: background-color 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
   overflow: hidden;
   border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+
+  /* Start state: hidden below */
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1),
+    transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.menu-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered card entrance */
+.menu-section .scroll-item {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.menu-section.visible .scroll-item {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .menu-container {
@@ -63,7 +86,7 @@
   cursor: grab;
   scroll-snap-type: x mandatory;
   padding: 2rem 0;
-  
+
   /* Hide Scrollbar */
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -76,7 +99,8 @@
 .scroll-inner {
   display: flex;
   gap: 1.5rem;
-  padding: 0 5%; /* Align with header */
+  padding: 0 5%;
+  /* Align with header */
 }
 
 .scroll-item {
@@ -99,19 +123,26 @@
   transform: translateY(-5px);
 }
 
+.menu-section.visible .scroll-item:hover {
+  transform: translateY(-5px);
+}
+
 @media (max-width: 768px) {
   .menu-section {
     padding: 6rem 0;
   }
+
   .section-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 1.5rem;
     margin-bottom: 2.5rem;
   }
+
   .section-title {
     font-size: 4rem;
   }
+
   .scroll-item {
     min-width: 280px;
     max-width: 280px;

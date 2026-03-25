@@ -11,52 +11,59 @@ export const Navbar = () => {
 
   const allCategories = menuData.flatMap(section => section.categories);
 
-  // Intersection Observer for highlighting sections
+  // Manual scroll-based tracking — more reliable than IntersectionObserver for this layout
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '-10% 0px -70% 0px', // Trigger when section is in top-ish part of screen
-      threshold: 0
-    };
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
 
-    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-      // Find the first entry that is intersecting
-      const visibleSection = entries.find(entry => entry.isIntersecting);
-      if (visibleSection && !isClickScrolling.current) {
-        setActiveTab(visibleSection.target.id);
+      if (isClickScrolling.current) return;
+
+      const scrollY = window.scrollY + 200; // offset for navbar height
+      let currentId = '';
+
+      for (const category of allCategories) {
+        const el = document.getElementById(category.id);
+        if (el) {
+          const top = el.offsetTop;
+          const bottom = top + el.offsetHeight;
+          if (scrollY >= top && scrollY < bottom) {
+            currentId = category.id;
+            break;
+          }
+        }
+      }
+
+      // Fallback: if we're past the last section, highlight the last one
+      if (!currentId && allCategories.length > 0) {
+        const lastCat = allCategories[allCategories.length - 1];
+        const lastEl = document.getElementById(lastCat.id);
+        if (lastEl && scrollY >= lastEl.offsetTop) {
+          currentId = lastCat.id;
+        }
+      }
+
+      if (currentId && currentId !== activeTab) {
+        setActiveTab(currentId);
       }
     };
 
-    const observer = new IntersectionObserver(handleIntersection, observerOptions);
-
-    allCategories.forEach(category => {
-      const element = document.getElementById(category.id);
-      if (element) observer.observe(element);
-    });
-
-    // Handle scroll for background color
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [allCategories]);
+    handleScroll(); // Run once on mount
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [allCategories, activeTab]);
 
   // Center the active tab in the scrolling nav
   useEffect(() => {
     if (activeTab && navRef.current) {
       const activeTabElement = navRef.current.querySelector(`[data-id="${activeTab}"]`) as HTMLElement;
       if (activeTabElement) {
-        const navWidth = navRef.current.clientWidth;
-        const tabWidth = activeTabElement.clientWidth;
-        const tabLeft = activeTabElement.offsetLeft;
+        const navRect = navRef.current.getBoundingClientRect();
+        const tabRect = activeTabElement.getBoundingClientRect();
+        const scrollLeft = navRef.current.scrollLeft;
+        const targetScroll = scrollLeft + tabRect.left - navRect.left - (navRect.width / 2) + (tabRect.width / 2);
         
         navRef.current.scrollTo({
-          left: tabLeft - (navWidth / 2) + (tabWidth / 2),
+          left: targetScroll,
           behavior: 'smooth'
         });
       }
@@ -69,14 +76,13 @@ export const Navbar = () => {
       isClickScrolling.current = true;
       setActiveTab(id);
       
-      const topOffset = element.getBoundingClientRect().top + window.scrollY - 100;
+      const topOffset = element.getBoundingClientRect().top + window.scrollY - 80;
       window.scrollTo({ top: topOffset, behavior: 'smooth' });
 
-      // Re-enable observer after scroll animation finishes
       if (scrollTimeout.current) window.clearTimeout(scrollTimeout.current);
       scrollTimeout.current = window.setTimeout(() => {
         isClickScrolling.current = false;
-      }, 1000); 
+      }, 800);
     }
   }, []);
 

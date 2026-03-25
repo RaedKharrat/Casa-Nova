@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import type { MenuCategory } from '../../data/menu';
 import { ProductCard } from '../ProductCard/ProductCard';
 import './MenuSection.css';
@@ -7,8 +8,28 @@ interface MenuSectionProps {
 }
 
 export const MenuSection = ({ category }: MenuSectionProps) => {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add('visible');
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section 
+      ref={sectionRef}
       id={category.id} 
       className="menu-section"
     >
@@ -23,12 +44,15 @@ export const MenuSection = ({ category }: MenuSectionProps) => {
         
         <div className="products-horizontal-scroll">
           <div className="scroll-inner">
-            {category.items.map((product) => (
-              <div key={product.id} className="scroll-item">
+            {category.items.map((product, index) => (
+              <div 
+                key={product.id} 
+                className="scroll-item"
+                style={{ transitionDelay: `${index * 0.06}s` }}
+              >
                 <ProductCard product={product} />
               </div>
             ))}
-            {/* Added a spacer at the end for better scroll ending */}
             <div className="scroll-spacer"></div>
           </div>
         </div>

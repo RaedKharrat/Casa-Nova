@@ -11,7 +11,6 @@ export const MenuSection = ({ category }: MenuSectionProps) => {
     <section 
       id={category.id} 
       className="menu-section"
-      style={{ backgroundColor: category.themeColor }}
     >
       <div className="menu-container">
         <div className="section-header">

@@ -14,18 +14,21 @@ function App() {
       <main>
         <Hero />
         <div className="menu-sections-wrapper">
-          {menuData.map((section) => (
-            <div key={section.id} className="menu-group">
-              <header className="group-header">
-                <h2 className="outlined-text">{section.title}</h2>
-              </header>
-              <div className="categories-grid">
-                {section.categories.map((category) => (
-                  <MenuSection key={category.id} category={category} />
-                ))}
+          {menuData.map((section) => {
+            const sectionBg = section.id === 'cold-drinks' ? '#0d1117' : '#17120d';
+            return (
+              <div key={section.id} className={`menu-group menu-group--${section.id}`} style={{ background: sectionBg }}>
+                <header className="group-header">
+                  <h2 className="outlined-text">{section.title}</h2>
+                </header>
+                <div className="categories-grid">
+                  {section.categories.map((category) => (
+                    <MenuSection key={category.id} category={category} />
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </main>
       <Footer />

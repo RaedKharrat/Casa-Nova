@@ -17,6 +17,8 @@ export const Hero = () => {
           <ChevronDown size={32} />
         </button>
       </div>
+      {/* Bottom melt — dark bg fills upward, hero image visible through drip gaps */}
+
     </section>
   );
 };

@@ -82,6 +82,7 @@ export const Navbar = () => {
 
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+      <div className="nav-wave-bar"></div>
       <div className="navbar-container" ref={navRef}>
         <div className="nav-list">
           {allCategories.map((category) => {

@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Sparkles, Star } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';

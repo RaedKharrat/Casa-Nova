@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { menuData } from '../../data/menu';
-import casanovaLogo from '../../assets/casanova.png';
 import './Navbar.css';
 
 export const Navbar = () => {

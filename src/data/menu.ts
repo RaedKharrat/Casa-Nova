@@ -8,7 +8,6 @@ import {
   GlassWater,
   Cookie,
   Beer,
-  Zap,
   Waves,
   Sparkles
 } from 'lucide-react';
@@ -36,8 +35,6 @@ export interface MenuSection {
   title: string;
   categories: MenuCategory[];
 }
-
-const generateId = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
 export const supplementData = {
   name: 'Supplements',

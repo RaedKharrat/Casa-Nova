@@ -43,7 +43,13 @@ export const Loader = () => {
     .to(containerRef.current, {
       yPercent: -100,
       duration: 1.2,
-      ease: 'expo.inOut'
+      ease: 'expo.inOut',
+      onComplete: () => {
+        if (containerRef.current) {
+          containerRef.current.style.display = 'none';
+          containerRef.current.style.pointerEvents = 'none';
+        }
+      }
     }, '-=0.3');
 
   }, { scope: containerRef });

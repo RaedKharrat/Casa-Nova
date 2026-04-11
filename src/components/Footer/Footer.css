@@ -145,20 +145,43 @@
 /* ─── Mobile ─── */
 @media (max-width: 768px) {
   .footer {
-    padding: 3rem 1.25rem 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .footer-melt svg {
+    height: 120px;
+  }
+
+  .footer-content-wrapper {
+    padding: 4rem 1.25rem 2rem;
   }
 
   .footer-container {
     flex-direction: column;
     gap: 2.5rem;
+    text-align: center;
+    align-items: center;
+  }
+
+  .footer-brand {
+    text-align: center;
+    margin: 0 auto;
   }
 
   .footer-logo-img {
-    height: 65px;
+    height: 80px;
+  }
+
+  .footer-tagline {
+    font-size: 0.65rem;
   }
 
   .social-link {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .footer-bottom-bar {
+    margin-top: 2rem;
   }
 }

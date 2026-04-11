@@ -438,7 +438,7 @@
   
   .list-content-scrollable {
     height: auto;
-    padding: 3rem 1.5rem;
+    padding: 3rem 1.5rem 10rem; /* Increased bottom padding for footer transition clearance */
   }
 
   .product-item::before {

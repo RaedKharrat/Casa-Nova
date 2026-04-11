@@ -1,0 +1,112 @@
+/* ═══════════════════════════════════════════
+   STATS MARQUEE — Infinite horizontal scroll
+   ═══════════════════════════════════════════ */
+
+.stats-marquee-section {
+  width: 100%;
+  overflow: hidden;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 1.75rem 0;
+  position: relative;
+}
+
+/* Fade edges */
+.stats-marquee-section::before,
+.stats-marquee-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.stats-marquee-section::before {
+  left: 0;
+  background: linear-gradient(to right, var(--surface), transparent);
+}
+
+.stats-marquee-section::after {
+  right: 0;
+  background: linear-gradient(to left, var(--surface), transparent);
+}
+
+.stats-marquee-track {
+  display: flex;
+  animation: statsScroll 30s linear infinite;
+  width: max-content;
+}
+
+.stats-marquee-group {
+  display: flex;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 2.5rem;
+  position: relative;
+  white-space: nowrap;
+}
+
+/* Dot separator between stats */
+.stat-item::after {
+  content: '·';
+  position: absolute;
+  right: 0;
+  color: var(--primary-dark);
+  font-size: 1.5rem;
+  line-height: 1;
+  opacity: 0.5;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+}
+
+.stat-label {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+@keyframes statsScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-25%); }
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 768px) {
+  .stats-marquee-section {
+    padding: 1.25rem 0;
+  }
+
+  .stat-item {
+    padding: 0 1.75rem;
+  }
+
+  .stat-value {
+    font-size: 1.1rem;
+  }
+
+  .stat-label {
+    font-size: 0.6rem;
+  }
+
+  .stats-marquee-section::before,
+  .stats-marquee-section::after {
+    width: 60px;
+  }
+}

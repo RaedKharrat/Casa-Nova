@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { menuData } from '../../data/menu';
+import casanovaLogo from '../../assets/casanova.png';
 import './Navbar.css';
 
 export const Navbar = () => {
@@ -61,7 +62,7 @@ export const Navbar = () => {
         const tabRect = activeTabElement.getBoundingClientRect();
         const scrollLeft = navRef.current.scrollLeft;
         const targetScroll = scrollLeft + tabRect.left - navRect.left - (navRect.width / 2) + (tabRect.width / 2);
-        
+
         navRef.current.scrollTo({
           left: targetScroll,
           behavior: 'smooth'
@@ -75,7 +76,7 @@ export const Navbar = () => {
     if (element) {
       isClickScrolling.current = true;
       setActiveTab(id);
-      
+
       const topOffset = element.getBoundingClientRect().top + window.scrollY - 80;
       window.scrollTo({ top: topOffset, behavior: 'smooth' });
 
@@ -88,13 +89,14 @@ export const Navbar = () => {
 
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="nav-wave-bar"></div>
-      <div className="navbar-container" ref={navRef}>
-        <div className="nav-list">
+      <div className="navbar-container">
+        {/* <div className="navbar-left">
+          <img src={casanovaLogo} alt="Casa Nova" className="navbar-logo-img" />
+        </div> */}
+        <div className="nav-list" ref={navRef}>
           {allCategories.map((category) => {
-            const Icon = category.icon;
             const isActive = activeTab === category.id;
-            
+
             return (
               <button
                 key={category.id}
@@ -103,7 +105,6 @@ export const Navbar = () => {
                 onClick={() => scrollToSection(category.id)}
                 aria-current={isActive ? 'page' : undefined}
               >
-                {Icon && <Icon className="nav-icon" size={16} />}
                 <span>{category.name}</span>
               </button>
             );

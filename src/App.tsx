@@ -1,39 +1,49 @@
 import { Loader } from './components/Loader/Loader';
 import { Navbar } from './components/Navbar/Navbar';
 import { Hero } from './components/Hero/Hero';
+import { StatsMarquee } from './components/StatsMarquee/StatsMarquee';
 import { MenuSection } from './components/MenuSection/MenuSection';
+import { HighlightBanner } from './components/HighlightBanner/HighlightBanner';
 import { Footer } from './components/Footer/Footer';
 import { menuData } from './data/menu';
 import './App.css';
+
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 
 function App() {
   return (
     <>
       <Loader />
       <Navbar />
+
       <main>
         <Hero />
+        <StatsMarquee />
+
         <div className="menu-sections-wrapper">
-          {menuData.map((section) => {
-            const sectionBg = section.id === 'cold-drinks' ? '#0d1117' : '#17120d';
-            return (
-              <div key={section.id} className={`menu-group menu-group--${section.id}`} style={{ background: sectionBg }}>
-                <header className="group-header">
-                  <h2 className="outlined-text">{section.title}</h2>
-                </header>
-                <div className="categories-grid">
-                  {section.categories.map((category) => (
-                    <MenuSection key={category.id} category={category} />
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+          {menuData.map((section, sectionIdx) => (
+            <div key={section.id} className="menu-group">
+              {section.categories.map((category, catIdx) => (
+                <MenuSection 
+                  key={category.id} 
+                  category={category} 
+                  index={catIdx}
+                />
+              ))}
+              {/* Insert HighlightBanner after the first menu group (Hot Drinks) */}
+              {sectionIdx === 0 && <HighlightBanner />}
+            </div>
+          ))}
         </div>
       </main>
       <Footer />
     </>
   );
 }
+
 
 export default App;

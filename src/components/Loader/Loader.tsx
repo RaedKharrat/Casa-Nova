@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import casanovaLogo from '../../assets/casanova.png';
 import './Loader.css';
 
 export const Loader = () => {
@@ -12,12 +13,10 @@ export const Loader = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  if (!loading) return null;
-
   return (
-    <div className="loader-container">
+    <div className={`loader-container ${!loading ? 'hidden' : ''}`}>
       <div className="loader-content">
-        <h1 className="loader-logo">Casa Nova</h1>
+        <img src={casanovaLogo} alt="Casa Nova" className="loader-logo-img" />
         <div className="loader-progress">
           <div className="loader-bar"></div>
         </div>

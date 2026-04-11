@@ -42,7 +42,7 @@
 .loader-logo-img {
   width: clamp(140px, 20vw, 200px);
   height: auto;
-  filter: drop-shadow(0 0 30px rgba(194, 157, 109, 0.2));
+  filter: brightness(0) invert(1) drop-shadow(0 0 30px rgba(255, 255, 255, 0.2));
   position: relative;
   z-index: 2;
 }
